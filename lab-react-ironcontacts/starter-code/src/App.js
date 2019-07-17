@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ContactsList from "./components/ContactsList";
+import ContactForm from "./components/ContactForm";
 import JSONContacts from "./contacts.json";
 
 import "./App.css";
@@ -9,7 +10,7 @@ class App extends Component {
     contacts: JSONContacts.slice(0, 5)
   };
 
-  pushContact = () => {
+  pushRandomContact = () => {
     let contacts = [...this.state.contacts];
     contacts.push(
       JSONContacts[Math.floor(Math.random() * JSONContacts.length)]
@@ -45,15 +46,25 @@ class App extends Component {
     });
   };
 
+  pushContact = contact => {
+    let contacts = [...this.state.contacts];
+    contacts.push(contact);
+
+    this.setState({ contacts: contacts });
+  };
+
   render() {
     return (
       <div className="App">
         <h1>IronContacts</h1>
-        <button onClick={this.pushContact}>Add random contact</button>
+        <button onClick={this.pushRandomContact}>Add random contact</button>
         <button onClick={() => this.sortContacts("name")}>Sort by Name</button>
         <button onClick={() => this.sortContacts("popularity")}>
           Sort by Popularity
         </button>
+
+        <ContactForm pushContact={this.pushContact} />
+
         <ContactsList
           handleDelete={this.handleDelete}
           contacts={this.state.contacts}
