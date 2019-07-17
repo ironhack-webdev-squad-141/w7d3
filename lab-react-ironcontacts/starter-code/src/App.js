@@ -20,7 +20,6 @@ class App extends Component {
     });
   };
 
-  // sortContacts("name")
   sortContacts = type => {
     let contacts = [...this.state.contacts];
 
