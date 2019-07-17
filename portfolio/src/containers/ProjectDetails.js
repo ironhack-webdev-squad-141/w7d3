@@ -5,7 +5,12 @@ import projects from "../projects";
 const ProjectDetails = props => {
   console.log(props, projects);
 
-  let foundProject = {}; // replace this line
+  const projectId = props.match.params.projectId;
+
+  let foundProject = projects.find(project => {
+    //   if (project.id === projectId) return true
+    return project.id === projectId;
+  });
 
   return (
     <div>
